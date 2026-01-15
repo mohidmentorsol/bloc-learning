@@ -25,7 +25,7 @@ class _CounterViewState extends State<CounterView> {
               builder: (context, state) {
                 return Text(
                   state.counter.toString(),
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 30),
                 );
               },
             ),

@@ -1,4 +1,5 @@
 import 'package:bloc_learning/bloc/slider_bloc/slider_bloc.dart';
+import 'package:bloc_learning/bloc/todo%20bloc/todo_bloc.dart';
 import 'package:bloc_learning/ui/slider_view.dart';
 import 'package:bloc_learning/ui/todo_view.dart';
 
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => SliderBloc())],
+      providers: [
+        BlocProvider(create: (_) => SliderBloc()),
+        BlocProvider(create: (_) => TodoBloc()),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(primarySwatch: Colors.blue),

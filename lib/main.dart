@@ -1,7 +1,6 @@
-import 'package:bloc_learning/bloc/counter%20bloc/counter_bloc.dart';
 import 'package:bloc_learning/bloc/slider_bloc/slider_bloc.dart';
 import 'package:bloc_learning/ui/slider_view.dart';
-import 'package:bloc_learning/ui/view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

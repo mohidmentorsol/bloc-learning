@@ -4,10 +4,15 @@ import 'package:bloc_learning/bloc/slider_bloc/slider_state.dart';
 
 class SliderBloc extends Bloc<SliderEvents, SliderState> {
   SliderBloc() : super(SliderState()) {
-    on<SlidersChangedEvents>(_changeSlider);
+    on<SliderUpdateEvent>(_changeSlider);
+    on<SwitchToggleEvent>(_isOn);
   }
 
-  void _changeSlider(SlidersChangedEvents event, Emitter<SliderState> emit) {
+  void _changeSlider(SliderUpdateEvent event, Emitter<SliderState> emit) {
     emit(state.copyWith(sliderValue: event.sliderValue));
+  }
+
+  void _isOn(SwitchToggleEvent event, Emitter<SliderState> emit) {
+    emit(state.copyWith(isOn: !state.isOn));
   }
 }

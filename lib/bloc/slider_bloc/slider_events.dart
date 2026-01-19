@@ -7,10 +7,14 @@ abstract class SliderEvents extends Equatable {
   List<Object?> get props => [];
 }
 
-class SlidersChangedEvents extends SliderEvents {
+class SliderUpdateEvent extends SliderEvents {
   final double sliderValue;
-  const SlidersChangedEvents({this.sliderValue = 0.0});
+  const SliderUpdateEvent({required this.sliderValue});
 
   @override
   List<Object?> get props => [sliderValue];
+}
+
+class SwitchToggleEvent extends SliderEvents {
+  const SwitchToggleEvent();
 }

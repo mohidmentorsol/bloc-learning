@@ -1,4 +1,6 @@
-import 'package:bloc_learning/bloc/counter_bloc.dart';
+import 'package:bloc_learning/bloc/counter%20bloc/counter_bloc.dart';
+import 'package:bloc_learning/bloc/slider_bloc/slider_bloc.dart';
+import 'package:bloc_learning/ui/slider_view.dart';
 import 'package:bloc_learning/ui/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,13 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CounterBloc(),
+      create: (context) => SliderBloc(),
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        ),
-        home: const CounterView(),
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const SliderView(),
       ),
     );
   }

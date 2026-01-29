@@ -1,5 +1,7 @@
+import 'package:bloc_learning/bloc/fav%20bloc/fav_bloc.dart';
 import 'package:bloc_learning/bloc/slider_bloc/slider_bloc.dart';
 import 'package:bloc_learning/bloc/todo%20bloc/todo_bloc.dart';
+import 'package:bloc_learning/repository/fav_repo.dart';
 import 'package:bloc_learning/ui/fav_view.dart';
 import 'package:bloc_learning/ui/slider_view.dart';
 import 'package:bloc_learning/ui/todo_view.dart';
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => SliderBloc()),
         BlocProvider(create: (_) => TodoBloc()),
+        BlocProvider(create: (_) => FavBloc(FavRepo())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

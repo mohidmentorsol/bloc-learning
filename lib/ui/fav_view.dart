@@ -1,5 +1,9 @@
+import 'package:bloc_learning/bloc/fav%20bloc/fav_bloc.dart';
+import 'package:bloc_learning/bloc/fav%20bloc/fav_events.dart';
+import 'package:bloc_learning/bloc/fav%20bloc/fav_states.dart';
+import 'package:bloc_learning/ui/models/fav_item_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavView extends StatefulWidget {
   const FavView({super.key});
@@ -9,6 +13,12 @@ class FavView extends StatefulWidget {
 }
 
 class _FavViewState extends State<FavView> {
+  @override
+  initState() {
+    super.initState();
+    context.read<FavBloc>().add(LoadFavItemsEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,25 +31,57 @@ class _FavViewState extends State<FavView> {
           ),
         ],
       ),
-      body: true
-          ? ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    title: Text('Favorite Item $index'),
+      body: BlocBuilder<FavBloc, FavStates>(
+        builder: (context, state) {
+          switch (state.status) {
+            case ListStatus.loading:
+              return const Center(child: CircularProgressIndicator());
+            case ListStatus.failure:
+              return const Center(
+                child: Text('Failed to load favorite items.'),
+              );
+            case ListStatus.success:
+              if (state.favItems.isEmpty) {
+                return const NoData();
+              } else {
+                return ListView.builder(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  itemBuilder: (context, index) {
+                    final item = state.favItems[index];
+                    return Card(
+                      child: ListTile(
+                        title: Text(item.title),
 
-                    leading: Checkbox(value: index.isEven, onChanged: (val) {}),
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.favorite_outline),
-                    ),
-                  ),
+                        leading: Checkbox(
+                          value: item.isSelected,
+                          onChanged: (val) {},
+                        ),
+                        trailing: IconButton(
+                          onPressed: () {
+                            FavItemModel favItem = FavItemModel(
+                              id: item.id,
+                              title: item.title,
+                              isFavorite: !item.isFavorite,
+                            );
+
+                            context.read<FavBloc>().add(AddFavItem(favItem));
+                          },
+                          icon: Icon(
+                            item.isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_outline,
+                            color: item.isFavorite ? Colors.red : Colors.grey,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  itemCount: state.favItems.length,
                 );
-              },
-              itemCount: 10,
-            )
-          : const NoData(),
+              }
+          }
+        },
+      ),
     );
   }
 }

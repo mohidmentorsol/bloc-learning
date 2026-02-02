@@ -8,6 +8,7 @@ enum ListStatus { loading, success, failure }
 
 class FavStates extends Equatable {
   final List<FavItemModel> favItems;
+
   final ListStatus status;
   const FavStates({this.favItems = const [], this.status = ListStatus.loading});
 

@@ -17,11 +17,28 @@ class AddFavItem extends FavEvent {
   @override
   List<Object?> get props => [item];
 }
+//
 
-class RemoveFavItem extends FavEvent {
+class ToggleFavItem extends FavEvent {
   final FavItemModel item;
-  const RemoveFavItem(this.item);
+  const ToggleFavItem(this.item);
 
   @override
   List<Object?> get props => [item];
+}
+
+class DeSelectAllItem extends FavEvent {
+  final List<FavItemModel> items;
+  const DeSelectAllItem(this.items);
+
+  @override
+  List<Object?> get props => [items];
+}
+
+class DeleteSelectedItems extends FavEvent {
+  final List<FavItemModel> items;
+  const DeleteSelectedItems(this.items);
+
+  @override
+  List<Object?> get props => [items];
 }
